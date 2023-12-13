@@ -17,7 +17,7 @@ bool compare(Edge e1, Edge e2)
 int findParent(int ele, int* parent)
 {
     if(parent[ele] == ele) return ele;
-    return findParent(parent[ele], parent);
+    return parent[ele] = findParent(parent[ele], parent);
 }
 void kruskal(Edge* edges, Edge* mst, int v, int e)
 {
@@ -26,9 +26,14 @@ void kruskal(Edge* edges, Edge* mst, int v, int e)
 
     // initialize the parent for every edges
     int* parent = new int[e];
+    // initialize rank for every disjoint set
+    int* Rank = new int[e];
+
     for(int i=0; i<e; i++) {
         parent[i] = i;
+        Rank[i] = 0;
     }
+
 
     // choose v-1 edges that has minimum weight
     int cnt = 0;
@@ -47,7 +52,9 @@ void kruskal(Edge* edges, Edge* mst, int v, int e)
             cnt++;
 
             // merge(union) two connected component(two disjoint set) into one
+            if(Rank[dp] > Rank[sp]) swap(dp, sp);
             parent[dp] = sp;
+            if(Rank[dp] == Rank[sp]) Rank[sp]++;
         }
         i++;
     }
@@ -90,3 +97,4 @@ int main()
     delete [] mst;
 
 }
+
