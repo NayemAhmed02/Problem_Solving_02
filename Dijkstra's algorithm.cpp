@@ -26,7 +26,7 @@ void printDijkstra(int distance[], int sv)
     {
         if(i == sv)
             continue;
-        cout<<"Minimum distance from "<<sv<<" vertex to "<<i<<" is: "<<distance[i]<<"\n";
+        cout<<"Minimum distance from vertex "<<sv<<" to vertex "<<i<<" is: "<<distance[i]<<"\n";
     }
 }
 
